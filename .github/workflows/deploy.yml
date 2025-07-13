@@ -1,6 +1,6 @@
 name: Deploy OSINT Bot
 
-on:
+"on":
   push:
     branches: [ main, master ]
   pull_request:
