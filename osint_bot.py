@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+python -m ensurepip --upgrade
 """
 OSINT Telegram Bot
 A simple OSINT (Open Source Intelligence) bot for Telegram with basic information gathering capabilities.
