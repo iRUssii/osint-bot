@@ -1,1 +1,15 @@
-
+services:
+  - type: web
+    name: osint-bot
+    env: python
+    region: oregon  # Choose a region close to your users
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py  # Replace 'app.py' with your main Python file
+    plan: free  # Options: free, starter, standard, or higher plans
+    envVars:
+      - key: SECRET_KEY
+        value: your_secret_key_here
+      - key: DATABASE_URL
+        sync: false  # Set to true if you want to sync with Render's dashboard
+    healthCheckPath: /health  # Adjust to your app's health endpoint
+    autoDeploy: true  # Automatically deploy on changes to the connected branch
