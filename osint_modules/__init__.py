@@ -1,7 +1,15 @@
-"""
-OSINT Bot Modules
-Collection of modules for Open Source Intelligence gathering and analysis
-"""
+from osint_modules.data_collector import OSINTDataCollector
+from osint_modules.analyzer import OSINTAnalyzer
+from osint_modules.reporter import OSINTReporter
+from osint_modules.database import OSINTDatabase
+from osint_modules.security import SecurityManager
 
-__version__ = "1.0.0"
-__author__ = "OSINT Bot Team"
+class OSINTBot:
+    def __init__(self, ...):
+        # ... your existing init code ...
+        self.data_collector = OSINTDataCollector()
+        self.analyzer = OSINTAnalyzer()
+        self.reporter = OSINTReporter()
+        self.database = OSINTDatabase()
+        self.security_manager = SecurityManager()
+        self.setup_handlers()
