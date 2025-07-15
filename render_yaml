@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: osint-bot
+    env: python
+    buildCommand: chmod +x start.sh
+    startCommand: ./start.sh
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: GITHUB_API_TOKEN
+        sync: false
+      - key: GITHUB_OWNER
+        value: iRUssii
+      - key: GITHUB_REPO
+        value: osint-bot
+    autoDeploy: false
