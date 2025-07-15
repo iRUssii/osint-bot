@@ -1,0 +1,89 @@
+name: Issue Validation
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  validate-issue:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check Issue Content
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body || '';
+            const title = issue.title || '';
+            
+            // Check for common placeholder patterns
+            const placeholders = [
+              'A clear and concise description of what the bug is.',
+              'A clear and concise description of what you expected to happen.',
+              'Go to \'...\'',
+              'Click on \'....\'',
+              'Scroll down to \'....\'',
+              'See error',
+              '[e.g. iOS]',
+              '[e.g. chrome, safari]',
+              '[e.g. 22]',
+              '[e.g. iPhone6]',
+              '[e.g. iOS8.1]',
+              '[e.g. stock browser, safari]',
+              'Add any other context about the problem here.'
+            ];
+            
+            // Check if issue contains mostly placeholder text
+            let placeholderCount = 0;
+            for (const placeholder of placeholders) {
+              if (body.includes(placeholder)) {
+                placeholderCount++;
+              }
+            }
+            
+            // Check for minimal title (like single character)
+            const isMinimalTitle = title.length < 3;
+            
+            // Check for template issues
+            const isTemplateIssue = placeholderCount > 3 || isMinimalTitle;
+            
+            if (isTemplateIssue) {
+              // Add a helpful comment
+              await github.rest.issues.createComment({
+                issue_number: issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `👋 Hi @${issue.user.login}!
+
+It looks like this issue might have been created using the issue template without filling in the details. 
+
+To help us assist you better, please:
+
+1. **Provide a clear title** describing the issue
+2. **Fill out the bug description** with specific details
+3. **Include steps to reproduce** the problem
+4. **Specify what you expected to happen**
+
+You can edit this issue by clicking the **Edit** button above, or you can close this issue and create a new one with the complete information.
+
+If you're having trouble with the OSINT bot, you can also:
+- Check the [documentation](https://github.com/iRUssii/osint-bot/blob/main/README.md)
+- Look at [existing issues](https://github.com/iRUssii/osint-bot/issues) to see if someone else has reported the same problem
+
+Thanks for helping us improve the OSINT bot! 🔍`
+              });
+              
+              // Add labels
+              await github.rest.issues.addLabels({
+                issue_number: issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: ['needs-info', 'template-issue']
+              });
+              
+              console.log('Issue appears to be incomplete - added helpful comment and labels');
+            } else {
+              console.log('Issue appears to be properly filled out');
+            }

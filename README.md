@@ -162,28 +162,63 @@ self.application.add_handler(CommandHandler("newlookup", self.new_lookup))
 
 ## Troubleshooting
 
+### Health Check Tool 🔧
+
+Before reporting issues, please run the health check script to diagnose common problems:
+
+```bash
+python health_check.py
+```
+
+This tool will check:
+- Environment variables configuration
+- Python dependencies
+- Database connectivity
+- Network access to OSINT APIs
+- Bot token validity
+
 ### Common Issues
 
 1. **Bot not responding**
+   - Run `python health_check.py` first
    - Check if `TELEGRAM_BOT_TOKEN` is correct
    - Verify the bot is added to the chat
    - Check GitHub Actions logs for deployment errors
 
 2. **IP lookup failing**
-   - Ensure internet connectivity
+   - Ensure internet connectivity (use health check tool)
    - Check if the IP format is valid
    - API rate limits may apply
+   - Some countries may block certain OSINT APIs
 
 3. **GitHub Actions deployment failing**
    - Verify all secrets are properly set
    - Check the workflow logs in the Actions tab
    - Ensure Python dependencies are correctly specified
 
+### Reporting Issues 📝
+
+When reporting issues, please:
+
+1. **Run the health check first**: `python health_check.py`
+2. **Use the appropriate issue template**:
+   - [Bug Report](https://github.com/iRUssii/osint-bot/issues/new?template=bug_report.md) - For general bugs
+   - [OSINT Command Issue](https://github.com/iRUssii/osint-bot/issues/new?template=osint_command_issue.md) - For command-specific problems
+   - [Feature Request](https://github.com/iRUssii/osint-bot/issues/new?template=feature_request.md) - For new features
+3. **Include the health check output** in your issue
+4. **Provide specific examples** of what you tried and what went wrong
+
 ### Logs
 
 The bot generates logs in two locations:
 - Console output (visible in GitHub Actions)
 - `osint_bot.log` file (when running locally)
+
+For debugging, you can increase log verbosity by setting the `DEBUG` environment variable:
+```bash
+export DEBUG=1
+python osint_bot.py
+```
 
 ## Contributing
 

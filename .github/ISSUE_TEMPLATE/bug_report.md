@@ -1,38 +1,59 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
+title: '[BUG] '
+labels: 'bug'
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+<!-- 
+🚨 IMPORTANT: Please fill out ALL required sections below. 
+Issues with only placeholder text will be closed automatically.
+-->
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Bug Description
+**What went wrong?**
+<!-- Replace this comment with a clear description of the bug -->
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**What command or feature were you using?**
+<!-- e.g., /ip 8.8.8.8, /domain google.com, etc. -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Steps to Reproduce
+**How can we recreate this issue?**
+1. 
+2. 
+3. 
+4. 
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**What error message did you see?**
+<!-- Paste the exact error message here -->
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+## Expected Behavior
+**What should have happened instead?**
+<!-- Replace this comment with what you expected to happen -->
 
-**Additional context**
-Add any other context about the problem here.
+## Environment Information
+**Bot Environment:**
+- [ ] Telegram Bot
+- [ ] Command used: 
+- [ ] Approximate time when issue occurred: 
+
+**Your Device (if relevant):**
+- [ ] Desktop
+- [ ] Mobile
+- OS: <!-- e.g., Windows 10, iOS 14, Android 11 -->
+- App: <!-- e.g., Telegram Desktop, Telegram Mobile -->
+
+## Screenshots or Logs
+<!-- If applicable, add screenshots or paste relevant log messages -->
+
+## Additional Context
+<!-- Add any other relevant information about the problem -->
+
+---
+**Checklist before submitting:**
+- [ ] I have filled out the bug description
+- [ ] I have provided steps to reproduce
+- [ ] I have specified what I expected to happen
+- [ ] I have checked that this isn't a duplicate issue
