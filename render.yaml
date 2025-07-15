@@ -1,15 +1,21 @@
+# Exported from Render on 2025-07-15T14:51:45Z
 services:
-  - type: web
-    name: osint-bot
-    env: python
-    region: oregon  # Choose a region close to your users
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py  # Replace 'app.py' with your main Python file
-    plan: free  # Options: free, starter, standard, or higher plans
-    envVars:
-      - key: SECRET_KEY
-        value: your_secret_key_here
-      - key: DATABASE_URL
-        sync: false  # Set to true if you want to sync with Render's dashboard
-    healthCheckPath: /health  # Adjust to your app's health endpoint
-    autoDeploy: true  # Automatically deploy on changes to the connected branch
+- type: worker
+  name: osint-bot
+  runtime: python
+  repo: https://github.com/nyrumx/osint-bot
+  plan: starter
+  envVars:
+  - key: WHOIS_API_KEY
+    sync: false
+  - key: TELEGRAM_BOT_TOKEN
+    sync: false
+  region: oregon
+  buildCommand: chmod +x start.sh
+  startCommand: ./start.sh
+  disk:
+    name: disk
+    mountPath: /data
+    sizeGB: 10
+  autoDeployTrigger: commit
+version: "1"
